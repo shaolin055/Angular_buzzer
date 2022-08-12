@@ -1,0 +1,13 @@
+<div>
+    <div>
+        <h1> Welcome {{user}}</h1>
+        <p>Host of the table: {{hostName}}</p>
+        <p>Table Id: {{tableName}}</p>
+    </div>
+    <button (click)="CreateTable()"> Create Table </button> <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Table Id</mat-label>
+    <input type="text" matInput [(ngModel)]="TableId">
+    </mat-form-field>
+    <button (click)="HostName()"> Join Table {{TableId}}</button>
+</div>

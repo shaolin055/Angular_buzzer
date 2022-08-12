@@ -1,0 +1,26 @@
+<div  class="d-flex justify-content-center">
+     <h1>   Welcome to Qick Buzz
+    </h1>
+</div>
+<table>
+    <tr>
+        <td>Put User Name: </td>
+        <td><mat-form-field class="d-flex justify-content-center" appearance="fill">
+            <mat-label>User Name</mat-label>
+        <input type="text" matInput [(ngModel)]="userName">
+        </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <button type="button" class="d-flex justify-content-center btn btn-info" (click)="SetUserName()"> Login  </button>
+            <h2> {{UserMissing}}</h2>
+        </td>
+    </tr>
+</table>
+<div>
+    <!-- <mat-form-field appearance="outline" class="test-class">
+        <input matInput type="text" formControlName="text" step="900" required />
+      </mat-form-field> -->
+</div>

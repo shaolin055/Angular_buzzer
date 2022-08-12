@@ -1,0 +1,24 @@
+
+<table>
+    <tr>
+        <th>{{rowName[0]}}</th>
+        <th *ngFor="let player of  playerName">
+            {{player}}
+        </th>
+    </tr>
+    
+    <tr>
+        <th> {{rowName[1]}}</th>
+        <th [ngClass] = "{'box-green' : currentScore>0, 'box-red':currentScore==0}" *ngFor="let currentScore of  playerCurrentScore"> 
+            {{currentScore}}
+        </th>
+    </tr>
+    <tr>
+        <th>{{rowName[2]}}</th>
+        <th *ngFor="let Score of  playerScore">
+            {{Score}}
+        </th>
+    </tr>
+
+</table>
+<p> {{typeOf}}</p>

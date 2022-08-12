@@ -1,0 +1,59 @@
+<div>
+    <p> Welcome: {{userName}}</p>
+    <p> Table Id: {{tableId}}</p>
+    <p> Host: {{hostUser}}</p>
+</div>
+<div *ngIf = "!showQuestion" id="divshow" >
+    <button  (click)="startGame()" id="PlayButton"> Play </button>
+</div>
+<div *ngIf = "showQuestion" id="divshow">
+    <p>Question: {{question}} <br>
+    <mat-button-toggle-group name="fontStyle" aria-label="FontStyle" (change)="toggleButtonResponse($event.value)">
+        <mat-button-toggle value="a">{{optionA}}</mat-button-toggle>
+        <mat-button-toggle value="b">{{optionB}}</mat-button-toggle>
+        <mat-button-toggle value="c">{{optionC}}</mat-button-toggle>
+    </mat-button-toggle-group>
+    </p>
+
+    <!-- <label>
+        <input type="radio" ng-model="color.name" value="red">
+        {{optionA}}
+    </label>
+    <label>
+        <input type="radio" ng-model="color.name" value="red">
+        {{optionB}}
+    </label>
+    <label>
+        <input type="radio" ng-model="color.name" value="red">
+        {{optionC}}
+    </label> -->
+<p>{{timeLeft}}</p>
+</div>
+<div>
+    <button  (click)="pressBuzzer()" id="BuzzerButton" [disabled]="DistableBuzzButton"> Buzzer </button>
+    <button *ngIf = 'showNextQuestionButton' (click)="NextQuestion()"> Next Question</button>
+</div>
+
+
+<div>
+    <table>
+        <tr>
+            <th> Id</th>
+            <th> question</th>
+            <th> a</th>
+            <th> b</th>
+            <th> c</th>
+            <th> Answer </th>
+        </tr>
+        <tr *ngFor="let question of appData">
+            <td> {{question.questionId}}</td>
+            <td> {{question.question}}</td>
+            <td> {{question.a}}</td>
+            <td> {{question.b}}</td>
+            <td> {{question.c}}</td>
+            <td> {{question.rightAnswer}}</td>
+
+        </tr>
+    </table>
+</div>
+<app-score-board></app-score-board>
