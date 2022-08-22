@@ -1,13 +1,19 @@
 <div>
-    <div>
-        <h1> Welcome {{user}}</h1>
-        <p>Host of the table: {{hostName}}</p>
-        <p>Table Id: {{tableName}}</p>
+    <div >
+        <h1 class="d-flex justify-content-center"> Welcome {{user}}<br></h1>
+        <p class="d-flex justify-content-center">Host of the table: {{hostName}} <br></p>
+        <p class="d-flex justify-content-center">Table Id: {{tableName}}</p>
     </div>
+    <div class="d-flex justify-content-center">
     <button (click)="CreateTable()"> Create Table </button> <br>
-    <mat-form-field appearance="fill">
-        <mat-label>Table Id</mat-label>
-    <input type="text" matInput [(ngModel)]="TableId">
-    </mat-form-field>
-    <button (click)="HostName()"> Join Table {{TableId}}</button>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Table Id</mat-label>
+            <input type="text" matInput [(ngModel)]="TableId">
+            <button (click)="HostName()"> Join Table</button>
+        </mat-form-field>
+        <p class="text-danger"> {{tableFoundMsg}}</p>
+        <!-- <button (click)="HostName()"> Join Table {{TableId}}</button> -->
+    </div>
 </div>

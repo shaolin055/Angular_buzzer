@@ -1,5 +1,5 @@
 
-<table>
+<table class="table align-middle">
     <tr>
         <th>{{rowName[0]}}</th>
         <th *ngFor="let player of  playerName">
@@ -10,7 +10,7 @@
     <tr>
         <th> {{rowName[1]}}</th>
         <th [ngClass] = "{'box-green' : currentScore>0, 'box-red':currentScore==0}" *ngFor="let currentScore of  playerCurrentScore"> 
-            {{currentScore}}
+            
         </th>
     </tr>
     <tr>
@@ -21,4 +21,3 @@
     </tr>
 
 </table>
-<p> {{typeOf}}</p>

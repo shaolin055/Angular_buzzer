@@ -18,7 +18,7 @@ export interface Config {
   providedIn: 'root'
 })
 export class ApiService {
-  url = "http://127.0.0.1:5000"
+  url = "http://172.16.224.199:5000"
   configUrlCreateTable = this.url + '/CreatePalyingTable?user=xxxx';
   configUrlGetScore = this.url + '/CheckScore?hostUser=xxxx&tableTag=xxxx';
   configUrlCheckAnswer = this.url + '/CheckAnswer?user=xxxx&hostUser=xxxx&tableTag=xxxx&questionID=xxxx&answer=xxxx';
@@ -27,7 +27,7 @@ export class ApiService {
   configUrlRequestForQuestionForJoiner = this.url + '/FetchQuestionForJoinerFromDatabase?hostUser=xxxx&tableTag=xxxx';
   configUrlJoinInaExistingTable = this.url + '/JoinInaExistingTable?user=xxxx&hostUser=xxxx&table_tag=xxxx';
   configUrlCheckHost = this.url + '/CheckHost?tableTag=xxxx';
-  configUrlGetQuestionWinner = this.url + 'RecentScore?hostUser=xxxx&tableTag=xxxx&questionID=xxxx';
+  configUrlGetQuestionWinner = this.url + '/CheckRecentQuestionResult?hostUser=xxxx&tableTag=xxxx';
 
   constructor(private http: HttpClient, private gameInfoService: GameInfoService) {
    }

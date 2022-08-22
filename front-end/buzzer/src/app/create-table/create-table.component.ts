@@ -16,6 +16,7 @@ export class CreateTableComponent implements OnInit
   IsJoinSucceed =false;
   hostName = ""
   response = ""
+  tableFoundMsg = ""
   emailPlaceholderText="Input Table Number"
   constructor(private gameInfoService:GameInfoService, private api: ApiService, private router: Router) { 
     this.user = gameInfoService.userName;
@@ -51,9 +52,16 @@ export class CreateTableComponent implements OnInit
     (
       data => {
         this.gameInfoService.hostUser= data[0];
-        this.hostName = this.gameInfoService.hostUser;
-        console.log(this.hostName)
-        this.JoinTable()
+        if(!this.gameInfoService.hostUser)
+        {
+          this.tableFoundMsg = "No Table is found"
+        }
+        else
+        {
+          this.hostName = this.gameInfoService.hostUser;
+          console.log(this.hostName)
+          this.JoinTable()
+        }
       }
     );
   }
@@ -66,7 +74,6 @@ export class CreateTableComponent implements OnInit
         this.IsJoinSucceed = data;
         if (this.IsJoinSucceed){
           this.tableName= this.gameInfoService.tableTag;
-          
         }
         else this.tableName=this.gameInfoService.tableTag;
         this.router.navigate(['/table']);

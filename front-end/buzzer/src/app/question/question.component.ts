@@ -78,10 +78,10 @@ export class QuestionComponent implements OnInit {
       this.NextQuestion();
     }
     else{
-      this.retriveScoreInterval();
+      this.guestFetchQuestionatIntervals();
     }
   }
-  retriveScoreInterval() { //need to destroy the interval later
+  guestFetchQuestionatIntervals() { //need to destroy the interval later
     console.log ("retriveScoreInterval is called")
     this.interval = 1000;
     var self = this
@@ -96,12 +96,12 @@ export class QuestionComponent implements OnInit {
           else {
             self.showQuestion= true;
             self.clientQuestion=data;
-            self.DistableBuzzButton = false;
+            // self.DistableBuzzButton = false;
             console.log(self.gameInfo.questionID, self.clientQuestion[0])
-            // if(self.gameInfo.questionID==self.clientQuestion[0] && self.gameInfo.questionID!=0)
-            // {
-              // self.DistableBuzzButton = true;
-            // }
+            if(self.gameInfo.questionID!=self.clientQuestion[0] && self.gameInfo.questionID!=0)
+            {
+              self.DistableBuzzButton = false;
+            }
             // else{
             //   self.DistableBuzzButton =true
             // }
@@ -162,12 +162,11 @@ export class QuestionComponent implements OnInit {
     (
       data => {
         this.response = data;
-        console.log(this.response)
+        console.log(this.response);
+        this.DistableBuzzButton = true; //One time buzzer
         }
     );
-    this.DistableBuzzButton = true; //One time buzzer
     }
-    
   }
 
   ngOnInit(): void {

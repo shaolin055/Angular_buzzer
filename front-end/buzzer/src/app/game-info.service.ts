@@ -15,7 +15,7 @@ export class GameInfoService {
   answer = "";
   isScoreboardPage = false;
   lastQuestionWinner = ""
-  participantName = ["Shaolin", "Shafiqul", "Islam"];
-  playerData = {'Shaolin':[2,1],'Shafiqul':[1,0],'Islam':[4,0]} ;
+  participantName = [];
+  playerData = {} ;
   constructor() { }
 }

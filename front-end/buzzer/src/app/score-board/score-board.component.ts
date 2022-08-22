@@ -18,19 +18,20 @@ export class ScoreBoardComponent implements OnInit {
   typeOf = typeof (this.rowName[0]);
   interval = 10000;
   scoreResponse = [];
+  recentWinner = "";
 
   constructor(gameInfo : GameInfoService,private api: ApiService) { 
-    this.playerScore = [];
-    this.playerCurrentScore = [];
+    this.playerScore = [0];
+    this.playerCurrentScore = [0];
     this.boxColor = [];
     // this.playerName = gameInfor.participantName;
     this.playerData = gameInfo.playerData;
     this.playerName = Object.keys(this.playerData);
-    for (let i = 0; i< this.playerName.length; i++){
-      this.playerScore.push(this.playerData[this.playerName[i] as (keyof typeof this.playerData)][0]);
-      this.playerCurrentScore.push(this.playerData[this.playerName[i] as (keyof typeof this.playerData)][1]);      
-      // this.playerScore.push(['3']);
-    }
+    // for (let i = 0; i< this.playerName.length; i++){
+    //   this.playerScore.push(this.playerData[this.playerName[i] as (keyof typeof this.playerData)][0]);
+    //   this.playerCurrentScore.push(this.playerData[this.playerName[i] as (keyof typeof this.playerData)][1]);      
+    //   // this.playerScore.push(['3']);
+    // }
 
     for (let i = 0 ; i< this.playerCurrentScore.length; i++){
       if (this.playerCurrentScore[i]==0)
@@ -41,43 +42,76 @@ export class ScoreBoardComponent implements OnInit {
         this.boxColor.push('green');
       }
     }
-    this.retriveScore()
+    this.fetchScoreinIntervals()
   }
 
-  retriveScore() { //need to destroy the interval later
-    this.interval = 8000;
-    var self = this
+  fetchScoreinIntervals() { //need to destroy the interval later
+    this.interval = 4000;
+    var self = this;
+
+    //Check score after some interval and update parameter
+
     var interval = setInterval(function(){
-          self.api.GetQuestionWinneFromDatabase()
-          .subscribe
-          (
-            data => {
-              self.scoreResponse = data;
-              console.log("winner of recent question is:");
-              console.log(self.scoreResponse)
-            }
-          );
+      console.log("We are fetching score.");
 
       self.api.GetScoreFromDatabase()
       .subscribe
       (
         data => {
           self.scoreResponse = data;
-          self.playerName=[]
-          self.playerScore=[]
-          
+
+          self.playerName= [];
+          self.playerScore= [];
+
           for ( let tag in self.scoreResponse)
           {
-            self.playerName.push(self.scoreResponse[tag][0])
-            self.playerScore.push(self.scoreResponse[tag][2])
+            self.playerName.push(self.scoreResponse[tag][0]);
+            self.playerScore.push(self.scoreResponse[tag][2]);
             // console.log(self.scoreResponse[tag][2])
           }
-          console.log(self.scoreResponse)
-          
+          console.log(self.scoreResponse);
                 }
-            
-          
       );
+
+      // Get score of recent open question
+
+      self.api.GetQuestionWinneFromDatabase()
+      .subscribe
+      (
+        data => {
+          self.recentWinner = data;
+          if (self.recentWinner[0]){
+            // console.log("winner of recent question is:");
+            // console.log(self.recentWinner[0], self.playerName.length);
+            self.playerCurrentScore = [];
+            for ( let player = 0; player <= self.playerName.length; player++)
+            {
+              // console.log("Player : "+ self.playerName + self.playerName[player])
+              // console.log(" =Winner: " + self.recentWinner[0])
+              if (self.playerName[player].localeCompare(self.recentWinner[0])==0)
+                {
+                  // console.log("We got a winner")
+                  self.playerCurrentScore.push(1);
+                }
+                else
+                {
+                  // console.log("We do not get a winner")
+                  self.playerCurrentScore.push(0);
+                }
+            }
+          }
+          else
+          {
+            for ( let player in self.playerData)
+            {
+              // self.playerData[player][0]=0;
+              
+            }
+          }
+        }
+      );
+
+
       //code goes here that will be run every 5 seconds.
     }, self.interval);
   }
